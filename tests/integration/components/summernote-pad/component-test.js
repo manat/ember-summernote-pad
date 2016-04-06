@@ -1,5 +1,8 @@
+import SummernotePage from './page-object';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+
+const summernote = new SummernotePage();
 
 moduleForComponent('summernote-pad', 'Integration | Component | summernote pad', {
   integration: true
@@ -11,14 +14,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{summernote-pad}}`);
 
-  assert.notEqual(this.$().text().trim(), '');
-
-  // Template block usage:
-  // this.render(hbs`
-  //   {{#summernote-pad}}
-  //     template block text
-  //   {{/summernote-pad}}
-  // `);
-
-  // assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(summernote.value, 'Hello Summernote');
 });
