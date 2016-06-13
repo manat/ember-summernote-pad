@@ -14,7 +14,8 @@ export default Ember.Route.extend({
             ],
             map: {
             	apiKey: 'AIzaSyALCBm4cAMf44UnLGIPDQzsZPp7pFTSnE0'
-            }
+            },
+            content: "<p>Hello, content</p>"
         };
     }
 });

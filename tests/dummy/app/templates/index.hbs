@@ -8,8 +8,13 @@
   <br/>
 
   <h3>Summernote with map plugin</h3>
-    {{#summernote-pad toolbar=model.toolbar map=model.map}}
+    {{#summernote-pad toolbar=model.toolbar map=model.map content=model.content}}
       <p>Hello, Summernote</p>
     {{/summernote-pad}}
   <br/>
+
+  <h3>Content</h3>
+  <div>
+  {{model.content}}
+  </div>
 </div>

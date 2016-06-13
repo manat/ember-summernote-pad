@@ -6,6 +6,7 @@
     "ember-cli-test-loader": "0.2.2",
     "ember-qunit-notifications": "0.1.0",
     "summernote": "~0.8.1",
-    "font-awesome": "fontawesome#^4.6.3"
+    "font-awesome": "fontawesome#^4.6.3",
+    "summernote-map-plugin": "https://github.com/maiyaporn/summernote-map-plugin.git"
   }
 }

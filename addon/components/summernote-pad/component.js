@@ -58,6 +58,8 @@ export default Ember.Component.extend({
 
   },
 
+  content: "",
+
   didInitAttrs() {
     Ember.assert("summernote has to exist on Ember.$.fn.summernote", typeof Ember.$.fn.summernote === "function" );
   },
@@ -81,6 +83,20 @@ export default Ember.Component.extend({
     };
 
     this.$('#summernote').summernote(options);
+    this.$('#summernote').summernote('code', this.get('content'));
+  },
+
+  keyUp: function() {
+    this.doUpdate();
+  },
+
+  click: function() {
+    this.doUpdate();
+  },
+
+  doUpdate: function() {
+    var content = this.$('#summernote').summernote('code');
+    this.set('content', content);
   },
 
   actions: {
