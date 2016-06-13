@@ -1,7 +1,15 @@
 <div class="container">
   <h1>ember-summernote-pad</h1>
-  <p>Summernote default toolbar</p>
+
+  <h3>Summernote default toolbar</h3>
     {{#summernote-pad}}
       <p>Hello, Summernote</p>
     {{/summernote-pad}}
+  <br/>
+
+  <h3>Summernote with map plugin</h3>
+    {{#summernote-pad toolbar=model.toolbar map=model.map}}
+      <p>Hello, Summernote</p>
+    {{/summernote-pad}}
+  <br/>
 </div>

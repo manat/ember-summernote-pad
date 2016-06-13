@@ -52,6 +52,12 @@ export default Ember.Component.extend({
   disableDragAndDrop: false,
   shortcuts: false,
 
+  // options for external plugins
+  map: {
+    // apiKey: ''
+
+  },
+
   didInitAttrs() {
     Ember.assert("summernote has to exist on Ember.$.fn.summernote", typeof Ember.$.fn.summernote === "function" );
   },
@@ -65,6 +71,7 @@ export default Ember.Component.extend({
       lang: this.get('lang'),
       toolbar: this.get('toolbar'),
       popover: this.get('popover'),
+      map: this.get('map'),
 
       callbacks: {
         onInit: function() {
