@@ -9,6 +9,7 @@ module.exports = function(defaults) {
       importJQuery: true,
       importBootstrap: true,
       importFontAwesome: true,
+      langs: ['th-TH'],
       plugins: ['bower_components/summernote-map-plugin/summernote-map-plugin.js']
     }
   });
