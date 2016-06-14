@@ -51,14 +51,8 @@ export default Ember.Component.extend({
   dialogsFade: true,
   disableDragAndDrop: false,
   shortcuts: false,
-
-  // options for external plugins
-  map: {
-    // apiKey: ''
-
-  },
-
   content: "",
+  extOptions: {},
 
   didInitAttrs() {
     Ember.assert("summernote has to exist on Ember.$.fn.summernote", typeof Ember.$.fn.summernote === "function" );
@@ -72,8 +66,8 @@ export default Ember.Component.extend({
       focus: this.get('focus'),
       lang: this.get('lang'),
       toolbar: this.get('toolbar'),
+      airmode: this.get('airmode'),
       popover: this.get('popover'),
-      map: this.get('map'),
 
       callbacks: {
         onInit: function() {
@@ -81,6 +75,11 @@ export default Ember.Component.extend({
         }
       }
     };
+
+    var pluginOptions = this.get('extOptions');
+    for( var key in pluginOptions ) {
+      options[key] = pluginOptions[key];
+    }
 
     this.$('#summernote').summernote(options);
     this.$('#summernote').summernote('code', this.get('content'));
@@ -97,9 +96,5 @@ export default Ember.Component.extend({
   doUpdate: function() {
     var content = this.$('#summernote').summernote('code');
     this.set('content', content);
-  },
-
-  actions: {
-
   }
 });

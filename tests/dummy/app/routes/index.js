@@ -12,8 +12,10 @@ export default Ember.Route.extend({
                 ['insert', ['link', 'picture', 'video', 'map']],
                 ['misc', ['codeview', 'help']]
             ],
-            map: {
-            	apiKey: 'AIzaSyALCBm4cAMf44UnLGIPDQzsZPp7pFTSnE0'
+            extOptions: {
+                'map': {
+            	   apiKey: 'AIzaSyALCBm4cAMf44UnLGIPDQzsZPp7pFTSnE0'
+                }
             },
             content: "<p>Hello, content</p>"
         };

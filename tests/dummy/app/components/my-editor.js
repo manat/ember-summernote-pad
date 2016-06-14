@@ -10,10 +10,13 @@ export default Ember.Component.extend({
         ['table', ['table']],
         ['insert', ['link', 'picture', 'video', 'map']],
         ['misc', ['codeview', 'help']]
-        ],
-    map: {
-        apiKey: 'AIzaSyALCBm4cAMf44UnLGIPDQzsZPp7pFTSnE0'
-    },
+    ],
+    pluginOptions: Ember.computed( function() {
+        return {
+            'map': {
+                apiKey: 'AIzaSyALCBm4cAMf44UnLGIPDQzsZPp7pFTSnE0'
+            }
+        };
+    }),
     content: "<p>Hello, Summernote</p>"
-
 });
