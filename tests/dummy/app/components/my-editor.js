@@ -18,5 +18,14 @@ export default Ember.Component.extend({
             }
         };
     }),
-    content: "<p>Hello, Summernote</p>"
+    content: "<p>Hello, Summernote</p>",
+
+    actions: {
+        onInit(text) {
+            console.log('onInit - ' + text);
+        },
+        didInsertImage() {
+            console.log('image insert');
+        }
+    }
 });

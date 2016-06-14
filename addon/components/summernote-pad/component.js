@@ -3,9 +3,8 @@ import layout from './template';
 
 export default Ember.Component.extend({
   layout: layout,
-
   // summernote initialization options
-  height: 150,
+  height: null,
   minHeight: null,
   maxHeight: null,
   focus: true,
@@ -26,7 +25,7 @@ export default Ember.Component.extend({
     ['insert', ['link', 'picture', 'video']],
     ['misc', ['codeview', 'help']]
   ],
-  airmode: false,
+  airMode: false,
   popover: {
     image: [
       ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
@@ -44,7 +43,6 @@ export default Ember.Component.extend({
       ['insert', ['link', 'picture']]
     ]
   },
-  // placeholder: '',
   fontNames: [],
   fontNamesIgnoreCheck: [],
   dialogsInBody: true,
@@ -66,35 +64,40 @@ export default Ember.Component.extend({
       focus: this.get('focus'),
       lang: this.get('lang'),
       toolbar: this.get('toolbar'),
-      airmode: this.get('airmode'),
+      airMode: this.get('airMode'),
       popover: this.get('popover'),
-
-      callbacks: {
-        onInit: function() {
-          console.log('Summernote is launched');
-        }
-      }
+      placeholder: this.get('content'),
+      callbacks: {}
     };
 
+    // Summernote callbacks - http://summernote.org/deep-dive/#callbacks
+    var callbacks = ['onInit', 'onEnter', 'onEnter', 'onFocus', 'onBlur', 'onKeyup', 'onKeydown', 'onPaste', 'onImageUpload', 'onChange'];
+    for( let cb of callbacks ) {
+      if( !Ember.isEmpty(this.get(cb)) ) {
+        options.callbacks[cb] = this.get(cb);
+      }
+    }
+
     var pluginOptions = this.get('extOptions');
-    for( var key in pluginOptions ) {
+    for( let key in pluginOptions ) {
       options[key] = pluginOptions[key];
     }
 
     this.$('#summernote').summernote(options);
-    this.$('#summernote').summernote('code', this.get('content'));
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    this.$('#summernote').summernote('destroy');
   },
 
   keyUp: function() {
-    this.doUpdate();
+    this.updateContent();
   },
 
-  click: function() {
-    this.doUpdate();
-  },
-
-  doUpdate: function() {
+  updateContent() {
     var content = this.$('#summernote').summernote('code');
     this.set('content', content);
   }
+
 });
