@@ -1,31 +1,24 @@
 import Ember from 'ember';
-import layout from '../templates/components/my-editor';
 
 export default Ember.Component.extend({
     toolbar: [
-        ['style', ['style']],
         ['style', ['bold', 'underline', 'clear']],
-        ['fontsize', ['fontsize']],
         ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
         ['insert', ['link', 'picture', 'video', 'map']],
         ['misc', ['codeview', 'help']]
     ],
     pluginOptions: Ember.computed( function() {
         return {
             'map': {
-                apiKey: 'AIzaSyALCBm4cAMf44UnLGIPDQzsZPp7pFTSnE0'
+                apiKey: 'AIzaSyC4wQxb6hFjF1nrDEg6ePZcTbmswq89hAE'
             }
         };
     }),
     content: "<p>Hello, Summernote</p>",
 
     actions: {
-        onInit(text) {
-            console.log('onInit - ' + text);
-        },
-        didInsertImage() {
-            console.log('image insert');
+        onInit(param) {
+            console.log('Summernote::onInit - ' + param);
         }
     }
 });
