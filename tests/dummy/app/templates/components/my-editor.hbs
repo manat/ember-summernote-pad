@@ -1,10 +1,8 @@
 <h3>Summernote with map plugin</h3>
-{{#summernote-pad height="150" toolbar=toolbar content=content lang="th-TH" extOptions=pluginOptions onInit=(action "onInit" "hello")}}
-  <p>Hello, Summernote</p>
-{{/summernote-pad}}
+{{summernote-pad height="150" toolbar=toolbar placeholder="write here..." lang="th-TH" extOptions=pluginOptions onInit=(action "onInit" "Hello") onContentUpdated=(action "onUpdate")}}
 <br/>
 
 <h3>Content</h3>
 <div>
- {{textarea cols="80" rows="10" value=content}}
+ {{textarea cols="80" rows="10" value=editorValue}}
 </div>

@@ -1,9 +1,12 @@
 import Ember from 'ember';
 import layout from './template';
 
+const EVENTS = ['onInit', 'onEnter', 'onFocus', 'onBlur', 'onKeyup', 'onKeydown', 'onPaste', 'onImageUpload'];
+
 export default Ember.Component.extend({
   layout: layout,
-  // summernote initialization options
+
+  // summernote options
   height: null,
   minHeight: null,
   maxHeight: null,
@@ -49,15 +52,26 @@ export default Ember.Component.extend({
   dialogsFade: true,
   disableDragAndDrop: false,
   shortcuts: false,
-  content: "",
+  placeholder: "Hello, Summernote",
   extOptions: {},
 
-  didInitAttrs() {
-    Ember.assert("summernote has to exist on Ember.$.fn.summernote", typeof Ember.$.fn.summernote === "function" );
-  },
+  callbacks: Ember.computed( function() {
+    let callbacks = {
+      onChange: this.contentDidUpdate.bind(this)
+    };
 
-  didInsertElement() {
-    var options = {
+    // Summernote callbacks - http://summernote.org/deep-dive/#callbacks
+    for( let e of EVENTS ) {
+      if( !Ember.isEmpty(this.get(e)) ) {
+        callbacks[e] = this.get(e);
+      }
+    }
+
+    return callbacks;
+  }),
+
+  options: Ember.computed( function() {
+    let options = {
       height: this.get('height'),
       minHeight: this.get('minHeight'),
       maxHeight: this.get('maxHeight'),
@@ -66,24 +80,20 @@ export default Ember.Component.extend({
       toolbar: this.get('toolbar'),
       airMode: this.get('airMode'),
       popover: this.get('popover'),
-      placeholder: this.get('content'),
-      callbacks: {}
+      callbacks: this.get('callbacks')
     };
 
-    // Summernote callbacks - http://summernote.org/deep-dive/#callbacks
-    var callbacks = ['onInit', 'onEnter', 'onEnter', 'onFocus', 'onBlur', 'onKeyup', 'onKeydown', 'onPaste', 'onImageUpload', 'onChange'];
-    for( let cb of callbacks ) {
-      if( !Ember.isEmpty(this.get(cb)) ) {
-        options.callbacks[cb] = this.get(cb);
-      }
-    }
+    Object.assign(options, this.get('extOptions'));
 
-    var pluginOptions = this.get('extOptions');
-    for( let key in pluginOptions ) {
-      options[key] = pluginOptions[key];
-    }
+    return options;
+  }),
 
-    this.$('#summernote').summernote(options);
+  didInitAttrs() {
+    Ember.assert("summernote has to exist on Ember.$.fn.summernote", typeof Ember.$.fn.summernote === "function" );
+  },
+
+  didInsertElement() {
+    this.$('#summernote').summernote(this.get('options'));
   },
 
   willDestroyElement() {
@@ -91,13 +101,8 @@ export default Ember.Component.extend({
     this.$('#summernote').summernote('destroy');
   },
 
-  keyUp: function() {
-    this.updateContent();
-  },
-
-  updateContent() {
-    var content = this.$('#summernote').summernote('code');
-    this.set('content', content);
+  contentDidUpdate(contents, $editable) {
+    this.sendAction('onContentUpdated', contents, $editable);
   }
 
 });

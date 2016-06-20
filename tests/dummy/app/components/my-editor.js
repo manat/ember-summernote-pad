@@ -14,11 +14,14 @@ export default Ember.Component.extend({
             }
         };
     }),
-    content: "<p>Hello, Summernote</p>",
 
     actions: {
         onInit(param) {
             console.log('Summernote::onInit - ' + param);
+        },
+
+        onUpdate(updatedContent, $editable) {
+            this.set('editorValue', updatedContent);
         }
     }
 });

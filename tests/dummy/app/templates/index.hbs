@@ -1,11 +1,7 @@
   <h3>Summernote default toolbar</h3>
-    {{#summernote-pad}}
-      <p>Hello, Summernote</p>
-    {{/summernote-pad}}
+    {{summernote-pad}}
   <br/>
 
   <h3>Summernote with map plugin</h3>
-    {{#summernote-pad toolbar=model.toolbar content=model.content extOptions=model.extOptions}}
-      <p>Hello, Summernote</p>
-    {{/summernote-pad}}
+    {{summernote-pad toolbar=model.toolbar placeholder="hello" extOptions=model.extOptions}}
   <br/>
