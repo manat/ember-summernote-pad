@@ -21,12 +21,10 @@ export default Ember.Component.extend({
     */
   toolbar: [
     ['style', ['style']],
-    ['style', ['bold', 'underline', 'clear']],
-    ['fontsize', ['fontsize']],
+    ['text-style', ['bold', 'underline', 'clear']],
     ['para', ['ul', 'ol', 'paragraph']],
     ['table', ['table']],
-    ['insert', ['link', 'picture', 'video']],
-    ['misc', ['codeview', 'help']]
+    ['insert', ['link', 'picture', 'video']]
   ],
   airMode: false,
   popover: {
