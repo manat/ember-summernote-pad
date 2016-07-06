@@ -1,4 +1,5 @@
 # Ember-summernote-pad
+[![npm version](https://badge.fury.io/js/ember-summernote-pad.svg)](https://badge.fury.io/js/ember-summernote-pad)
 
 This README outlines the details of collaborating on this Ember addon.
 
