@@ -77,15 +77,6 @@ test('it calls onBlur', function(assert) {
   summernote.focusOut();
 });
 
-test('it calls onContentUpdate', function(assert) {
-  this.on('contentUpdated', ()=> {
-    console.log(summernote.value);
-    assert.ok(true, "onContentUpdated is called.");
-  });
-
-  this.render(hbs `{{summernote-pad onContentUpdated=(action "contentUpdated")}}`);
-  summernote.updateContent();
-});
 
 
 
